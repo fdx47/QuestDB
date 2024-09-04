@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  questdb:
+    image: questdb/questdb:latest  # Usa a versão mais recente do QuestDB
+    container_name: questdb
+    restart: unless-stopped
+    ports:
+      - "9000:9000"  # Porta para o Web Console
+      - "8812:8812"  # Porta para a REST API
+      - "9009:9009"  # Porta para o InfluxDB Line Protocol (ILP)
+    volumes:
+      - questdb-data:/root/.questdb/db  # Persistência dos dados
+
+volumes:
+  questdb-data:
+    driver: local
